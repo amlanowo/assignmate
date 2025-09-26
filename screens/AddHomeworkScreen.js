@@ -48,6 +48,8 @@ export default function AddHomeworkScreen({ navigation }) {
   const [enableReminders, setEnableReminders] = useState(true);
   const [reminderTime, setReminderTime] = useState('1_hour'); // Default: 1 hour before
   const [showReminderPicker, setShowReminderPicker] = useState(false);
+  
+
 
   const priorities = [
     { key: 'low', label: 'Low', color: colors.success },
@@ -99,9 +101,11 @@ export default function AddHomeworkScreen({ navigation }) {
     }
   };
 
+
+
   const saveHomework = async () => {
     if (!title.trim()) {
-      Alert.alert('Error', 'Please enter a title for your homework');
+      Alert.alert('❌ Error', 'Please enter a title for your homework');
       return;
     }
 
@@ -132,12 +136,12 @@ export default function AddHomeworkScreen({ navigation }) {
       const updatedHomework = [...existingHomework, newHomework];
       await Storage.saveHomework(updatedHomework);
       
-      Alert.alert('Success', 'Homework added successfully!', [
+      Alert.alert('✅ Success', 'Homework added successfully!', [
         { text: 'OK', onPress: () => navigation.navigate('Home') }
       ]);
       clearForm();
     } catch (error) {
-      Alert.alert('Error', 'Failed to save homework');
+      Alert.alert('❌ Error', 'Failed to save homework');
     }
   };
 
@@ -250,7 +254,7 @@ export default function AddHomeworkScreen({ navigation }) {
             >
               <Ionicons name="calendar" size={20} color={colors.primary} />
               <Text style={[styles.dateButtonText, { color: colors.text, ...typography.body }]}>
-                {dueDate.toLocaleDateString()} at {dueDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                {dueDate.toLocaleDateString()}
               </Text>
             </TouchableOpacity>
           </View>
@@ -366,7 +370,7 @@ export default function AddHomeworkScreen({ navigation }) {
       {showDatePicker && (
         <DateTimePicker
           value={dueDate}
-          mode="datetime"
+          mode="date"
           display="default"
           onChange={onDateChange}
           minimumDate={new Date()}
@@ -426,6 +430,8 @@ export default function AddHomeworkScreen({ navigation }) {
           </View>
         </View>
       )}
+
+
     </SafeAreaView>
   );
 }
@@ -458,6 +464,9 @@ const styles = StyleSheet.create({
   },
   textArea: {
     height: 100,
+    borderWidth: 1,
+    padding: 16,
+    fontSize: 17,
   },
   dateButton: {
     borderWidth: 1,
@@ -576,4 +585,5 @@ const styles = StyleSheet.create({
   modalCancelText: {
     textAlign: 'center',
   },
+
 });

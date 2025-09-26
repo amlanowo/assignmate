@@ -67,102 +67,9 @@ export default function SettingsScreen() {
     }
   };
 
-  const testNotification = async () => {
-    try {
-      // Check if notifications are enabled
-      if (!notificationsEnabled) {
-        Alert.alert(
-          'Notifications Disabled',
-          'Please enable notifications first to test them.',
-          [{ text: 'OK' }]
-        );
-        return;
-      }
 
-      // Configure notification handler
-      Notifications.setNotificationHandler({
-        handleNotification: async () => ({
-          shouldShowAlert: true,
-          shouldPlaySound: true,
-          shouldSetBadge: false,
-        }),
-      });
 
-      // Schedule a test notification for 3 seconds from now
-      const notificationId = await Notifications.scheduleNotificationAsync({
-        content: {
-          title: '📚 Homework Reminder',
-          body: 'This is a test notification from Homework Planner!',
-          data: { type: 'test' },
-          sound: true,
-        },
-        trigger: { seconds: 3 },
-      });
 
-      console.log('Test notification scheduled with ID:', notificationId);
-
-      Alert.alert(
-        'Test Notification Sent',
-        'A test notification will appear in 3 seconds. Check your notification panel!',
-        [{ text: 'OK' }]
-      );
-    } catch (error) {
-      console.log('Error sending test notification:', error);
-      Alert.alert(
-        'Error',
-        `Failed to send test notification: ${error.message}`,
-        [{ text: 'OK' }]
-      );
-    }
-  };
-
-  const viewScheduledNotifications = async () => {
-    try {
-      const scheduledNotifications = await Notifications.getAllScheduledNotificationsAsync();
-      const homeworkData = await Storage.getHomework();
-      
-      let message = `Scheduled Notifications: ${scheduledNotifications.length}\n\n`;
-      
-      scheduledNotifications.forEach((notification, index) => {
-        const homework = homeworkData.find(h => h.notificationId === notification.identifier);
-        const homeworkTitle = homework ? homework.title : 'Unknown';
-        const triggerDate = notification.trigger.date ? new Date(notification.trigger.date).toLocaleString() : 'Unknown';
-        
-        message += `${index + 1}. ${homeworkTitle}\n   Due: ${triggerDate}\n\n`;
-      });
-      
-      if (scheduledNotifications.length === 0) {
-        message = 'No scheduled notifications found.';
-      }
-      
-      Alert.alert('Scheduled Notifications', message, [{ text: 'OK' }]);
-    } catch (error) {
-      console.log('Error getting scheduled notifications:', error);
-      Alert.alert(
-        'Error',
-        'Failed to retrieve scheduled notifications.',
-        [{ text: 'OK' }]
-      );
-    }
-  };
-
-  const cancelAllNotifications = async () => {
-    try {
-      await Notifications.cancelAllScheduledNotificationsAsync();
-      Alert.alert(
-        'Notifications Cancelled',
-        'All scheduled homework reminders have been cancelled.',
-        [{ text: 'OK' }]
-      );
-    } catch (error) {
-      console.log('Error cancelling notifications:', error);
-      Alert.alert(
-        'Error',
-        'Failed to cancel notifications.',
-        [{ text: 'OK' }]
-      );
-    }
-  };
 
   const clearAllHomework = () => {
     Alert.alert(
@@ -303,24 +210,8 @@ export default function SettingsScreen() {
                 switchValue={notificationsEnabled}
                 onSwitchChange={requestNotificationPermissions}
               />
-              <SettingItem
-                icon="notifications-circle-outline"
-                title="Test Notifications"
-                subtitle="Send a test notification"
-                onPress={testNotification}
-              />
-              <SettingItem
-                icon="list-outline"
-                title="View Scheduled"
-                subtitle="See all scheduled reminders"
-                onPress={viewScheduledNotifications}
-              />
-              <SettingItem
-                icon="close-circle-outline"
-                title="Cancel All Reminders"
-                subtitle="Cancel all scheduled notifications"
-                onPress={cancelAllNotifications}
-              />
+
+
               <SettingItem
                 icon="moon-outline"
                 title="Dark Mode"

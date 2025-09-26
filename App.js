@@ -3,9 +3,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
-import * as Notifications from 'expo-notifications';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, StyleSheet, Alert } from 'react-native';
+import * as Notifications from 'expo-notifications';
+import NotificationService from './services/NotificationService';
 
 // Import screens
 import HomeScreen from './screens/HomeScreen';
@@ -14,14 +15,7 @@ import HomeworkListScreen from './screens/HomeworkListScreen';
 import StatusScreen from './screens/StatusScreen';
 import SettingsScreen from './screens/SettingsScreen';
 
-// Configure notifications
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: false,
-  }),
-});
+
 
 const Tab = createBottomTabNavigator();
 
@@ -172,13 +166,58 @@ const styles = StyleSheet.create({
 
 export default function App() {
   useEffect(() => {
-    // Request notification permissions when app starts
-    const requestPermissions = async () => {
-      const { status } = await Notifications.requestPermissionsAsync();
-      console.log('Notification permission status:', status);
+    // Initialize notification service
+    const initializeNotifications = async () => {
+      try {
+        await NotificationService.initialize();
+        console.log('Notification service initialized successfully');
+      } catch (error) {
+        console.log('Notification service initialization failed:', error);
+      }
     };
-    
-    requestPermissions();
+
+    initializeNotifications();
+
+    // Set up notification response handler
+    const responseListener = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log('Notification response:', response);
+      const data = response.notification.request.content.data;
+      
+      if (data.type === 'homework_reminder') {
+        Alert.alert(
+          '📚 Homework Reminder',
+          `"${data.homeworkTitle || 'Your homework'}" is due soon!`,
+          [
+            { text: 'View Details', onPress: () => console.log('Navigate to homework details') },
+            { text: 'Mark Complete', onPress: () => console.log('Mark as complete') },
+            { text: 'Dismiss', style: 'cancel' }
+          ]
+        );
+      } else if (data.type === 'due-date-reminder') {
+        Alert.alert(
+          '📚 Due Date Reminder',
+          `"${data.homeworkTitle}" is due soon!`,
+          [
+            { text: 'View Details', onPress: () => console.log('Navigate to homework details') },
+            { text: 'Mark Complete', onPress: () => console.log('Mark as complete') },
+            { text: 'Dismiss', style: 'cancel' }
+          ]
+        );
+      } else if (data.type === 'daily-review') {
+        Alert.alert(
+          '📚 Daily Review',
+          'Time to check your homework!',
+          [
+            { text: 'Open App', onPress: () => console.log('Navigate to home') },
+            { text: 'Dismiss', style: 'cancel' }
+          ]
+        );
+      }
+    });
+
+    return () => {
+      Notifications.removeNotificationSubscription(responseListener);
+    };
   }, []);
 
   return (

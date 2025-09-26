@@ -1,0 +1,63 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="512" cy="512" r="512" fill="#E0F2FE"/>
+  
+  <!-- Calendar frame -->
+  <rect x="200" y="150" width="624" height="724" rx="24" fill="#1E40AF" stroke="#E5E7EB" stroke-width="8"/>
+  
+  <!-- Calendar spiral binding rings -->
+  <circle cx="280" cy="200" r="16" fill="#60A5FA"/>
+  <circle cx="360" cy="200" r="16" fill="#60A5FA"/>
+  <circle cx="440" cy="200" r="16" fill="#60A5FA"/>
+  <circle cx="520" cy="200" r="16" fill="#60A5FA"/>
+  <circle cx="600" cy="200" r="16" fill="#60A5FA"/>
+  <circle cx="680" cy="200" r="16" fill="#60A5FA"/>
+  <circle cx="760" cy="200" r="16" fill="#60A5FA"/>
+  
+  <!-- Calendar page -->
+  <rect x="220" y="240" width="584" height="614" rx="16" fill="white" stroke="#F3F4F6" stroke-width="4"/>
+  
+  <!-- Calendar grid - 3 rows by 5 columns as in the reference -->
+  <!-- Row 1 -->
+  <rect x="240" y="260" width="100" height="100" rx="8" fill="#FEF3C7"/> <!-- Math - Yellow -->
+  <rect x="360" y="260" width="100" height="100" rx="8" fill="#DBEAFE"/> <!-- Science - Blue -->
+  <rect x="480" y="260" width="100" height="100" rx="8" fill="#F3E8FF"/> <!-- History - Purple -->
+  <rect x="600" y="260" width="100" height="100" rx="8" fill="#FEE2E2"/> <!-- English - Red -->
+  <rect x="720" y="260" width="100" height="100" rx="8" fill="#D1FAE5"/> <!-- Art - Green -->
+  
+  <!-- Row 2 -->
+  <rect x="240" y="380" width="100" height="100" rx="8" fill="#FEF3C7"/> <!-- Math -->
+  <rect x="360" y="380" width="100" height="100" rx="8" fill="#DBEAFE"/> <!-- Science -->
+  <rect x="480" y="380" width="100" height="100" rx="8" fill="#F3E8FF"/> <!-- History -->
+  <rect x="600" y="380" width="100" height="100" rx="8" fill="#FEE2E2"/> <!-- English -->
+  <rect x="720" y="380" width="100" height="100" rx="8" fill="#D1FAE5"/> <!-- Art -->
+  
+  <!-- Row 3 -->
+  <rect x="240" y="500" width="100" height="100" rx="8" fill="#FEF3C7"/> <!-- Math -->
+  <rect x="360" y="500" width="100" height="100" rx="8" fill="#DBEAFE"/> <!-- Science -->
+  <rect x="480" y="500" width="100" height="100" rx="8" fill="#F3E8FF"/> <!-- History -->
+  <rect x="600" y="500" width="100" height="100" rx="8" fill="#FEE2E2"/> <!-- English -->
+  <rect x="720" y="500" width="100" height="100" rx="8" fill="#D1FAE5"/> <!-- Art -->
+  
+  <!-- Checkmarks on completed tasks -->
+  <circle cx="290" cy="310" r="20" fill="#10B981" stroke="white" stroke-width="3"/>
+  <path d="M282 310L286 314L298 302" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <circle cx="410" cy="430" r="20" fill="#10B981" stroke="white" stroke-width="3"/>
+  <path d="M402 430L406 434L418 422" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <circle cx="530" cy="550" r="20" fill="#10B981" stroke="white" stroke-width="3"/>
+  <path d="M522 550L526 554L538 542" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <circle cx="650" cy="430" r="20" fill="#10B981" stroke="white" stroke-width="3"/>
+  <path d="M642 430L646 434L658 422" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <circle cx="770" cy="310" r="20" fill="#10B981" stroke="white" stroke-width="3"/>
+  <path d="M762 310L766 314L778 302" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Priority indicator (dark dot) in top-left corner -->
+  <circle cx="290" cy="310" r="8" fill="#374151"/>
+  
+  <!-- Subtle shadow for depth -->
+  <rect x="208" y="158" width="624" height="724" rx="24" fill="rgba(0,0,0,0.1)"/>
+</svg>

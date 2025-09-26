@@ -1,2 +1,13 @@
-# Placeholder for splash screen
-# You can replace this with an actual PNG image
+# This is a placeholder file
+# The actual splash screen should be a PNG image
+# For now, we'll use the icon as the splash screen
+# 
+# To create a proper splash screen:
+# 1. Open your calendar icon in an image editor
+# 2. Create a new canvas: 1242x2436 pixels (iPhone X resolution)
+# 3. Set background to #000000 (black)
+# 4. Place your icon in the center
+# 5. Add "AssignMate" text below the icon
+# 6. Save as PNG
+# 
+# For now, the app will use the icon as splash screen
