@@ -63,7 +63,6 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
 
-
     // Download button functionality - Force Google Drive link
     const downloadBtn = document.getElementById('android-download-btn');
     if (downloadBtn) {
@@ -241,3 +240,4 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
