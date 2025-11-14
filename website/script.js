@@ -104,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const isPercentage = finalValue.includes('%');
                 const isStar = finalValue.includes('★');
                 const isK = finalValue.includes('K');
+                const hasPlus = finalValue.includes('+') && !isK; // Check for + but not K+ (K+ is already handled)
                 
                 let numericValue;
                 if (isK) {
@@ -113,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else if (isStar) {
                     numericValue = parseFloat(finalValue.replace('★', ''));
                 } else {
-                    numericValue = parseFloat(finalValue);
+                    numericValue = parseFloat(finalValue.replace('+', ''));
                 }
                 
                 let currentValue = 0;
@@ -133,6 +134,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         displayValue += '%';
                     } else if (isStar) {
                         displayValue += '★';
+                    } else if (hasPlus) {
+                        displayValue += '+';
                     }
                     
                     target.textContent = displayValue;
